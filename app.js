@@ -3,19 +3,47 @@ import https from "https";
 
 //Creamos el servidor, lo metemos en una variable y le mandamos un mensaje
 let myServer = createServer((req, res)=>{
-    //Hacemos la consulta a la api con https
+    
+    let data = "";
+    https.get("https://api.nasa.gov/neo/rest/v1/feed?api_key=HGeXiToRtPqmcuMgzClrGSYThNMDNGgrq6fb8ej0", (req)=>{
+        req.on("data", (chunk)=>{
+            
+            data += chunk;
+        })
+        req.on("end", ()=>{
+            //Parseo el objeto json a objeto javascrip´t para poder acceder a sus propiedades con el sistems de puntuación
+            let objJson = JSON.parse(data);
+            let asteroids = objJson.near_earth_objects;
+            //Obtengo los valores del objeto en cuestión para convertirlo en un array y poder iterarlo
+            Object.values(asteroids).forEach((array)=>{
+                array.forEach((element)=>{
+                    console.log(element);
+                })
+            })
+            res.end(data);
+        })
+    })
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    /* //Hacemos la consulta a la api con https
+    let data = "";
     https.get("https://pokeapi.co/api/v2/pokemon/ditto", (req)=>{
         //Esperamos la respuesta de la api
-        let data = "";
         req.on("data", (chunk)=>{
             data += chunk;
         })
         //Obtenemos la respuesta y la mostramos en consola
         req.on("end", ()=>{
-            console.log(JSON.parse(data));
+            res.end(data);
         })
-    })
-    res.end("hola");
+    }) */
 
 
 
