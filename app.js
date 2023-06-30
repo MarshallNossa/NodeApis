@@ -11,12 +11,12 @@ let myServer = createServer((req, res)=>{
             data += chunk;
         })
         req.on("end", ()=>{
-            //Parseo el objeto json a objeto javascript para poder acceder a sus propiedades con el sistems de puntuación
+            //Parseo el objeto json a objeto javascrip´t para poder acceder a sus propiedades con el sistems de puntuación
             let plantilla = /* html */ `
                 <h1 style="display: flex; justify-content: center;">Asteroids near to the earth</h1>
                 <div class="searcherPadre">
                     <input id="searcher" type="date">
-                    <input type="submit" value="Ver">
+                    <input class="btn" type="submit" value="Ver">
                 </div>
                 <div class="padre" style="width: 100%; display: flex; flex-wrap: wrap; justify-content: center;">
             `;
@@ -62,6 +62,14 @@ let myServer = createServer((req, res)=>{
                 #searcher {
                     font-family: "Helvetica";
                     width: 50%;
+                    height: 50%;
+                    border-radius: 10px;
+                }
+                .btn {
+                    font-family: "Helvetica";
+                    background-color: white;
+                    margin-left: 20px;
+                    width: 10%;
                     height: 50%;
                     border-radius: 10px;
                 }
